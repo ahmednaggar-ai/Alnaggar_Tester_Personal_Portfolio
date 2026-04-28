@@ -1,10 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/theme-toggle";
 
 const navItems = ["Summary", "Logbook", "Tech Stack", "Benchmarks", "Contact"];
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 12);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="w-full bg-card/95 py-4 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 w-full border-b py-4 transition-all duration-300 ${
+        isScrolled
+          ? "border-foreground/10 bg-card/72 shadow-sm backdrop-blur-xl"
+          : "border-transparent bg-card/40 backdrop-blur-md"
+      }`}
+    >
       <nav className="mx-auto flex w-[90%] items-center justify-between gap-4">
         <h1 className="flex items-center gap-3 text-foreground">
           <svg
