@@ -12,16 +12,14 @@ function applyTheme(theme: Theme) {
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved === "light" || saved === "dark" ? saved : "light";
-  });
+  const [theme, setTheme] = useState<Theme>("light");
+
   useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const initialTheme: Theme = saved === "light" || saved === "dark" ? saved : "light";
+    setTheme(initialTheme);
+    applyTheme(initialTheme);
+  }, []);
 
   function toggleTheme() {
     const nextTheme: Theme = theme === "light" ? "dark" : "light";
@@ -34,7 +32,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="rounded-md border border-card-border bg-card p-2 text-foreground transition hover:opacity-90"
+      className="bg-card p-2 text-foreground transition hover:opacity-90 cursor-pointer"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (
