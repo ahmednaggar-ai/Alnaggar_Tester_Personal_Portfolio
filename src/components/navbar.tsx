@@ -7,10 +7,13 @@ const navItems = ["Summary", "Logbook", "Tech Stack", "Benchmarks", "Contact"];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
-      setIsScrolled(window.scrollY > 12);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 12);
     }
 
     handleScroll();
@@ -73,7 +76,7 @@ export default function Navbar() {
           <span className="font-display text-base tracking-tight">QA_ENGINEER</span>
         </h1>
 
-        <ul className="hidden items-center gap-6 md:flex">
+        <ul className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) => (
             <li key={item}>
               <a
@@ -87,12 +90,69 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
-          <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 dark:bg-white dark:text-black cursor-pointer">
+          <div className="hidden lg:block">
+            <ThemeToggle />
+          </div>
+          <button className="hidden rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 dark:bg-white dark:text-black lg:inline-flex cursor-pointer">
             Download CV
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-card-border text-foreground lg:hidden"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M6 6L18 18M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 7H20M4 12H20M4 17H20"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </nav>
+
+      <div
+        className={`absolute left-1/2 top-full z-50 w-[90%] -translate-x-1/2 rounded-b-xl border border-card-border/60 bg-card/95 p-4 shadow-xl backdrop-blur-xl transition-all duration-300 lg:hidden ${
+          isMenuOpen ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
+        <ul className="space-y-2">
+          {navItems.map((item) => (
+            <li key={`mobile-${item}`}>
+              <a
+                href="#"
+                className="block rounded-md px-2 py-2 text-sm font-medium text-muted transition hover:bg-surface hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+          <li>
+            <div className="px-2 py-1">
+              <ThemeToggle />
+            </div>
+          </li>
+        </ul>
+        <button className="mt-4 w-full rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 dark:bg-white dark:text-black cursor-pointer">
+          Download CV
+        </button>
+      </div>
     </header>
   );
 }
