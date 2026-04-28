@@ -32,7 +32,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="bg-card p-2 text-foreground transition hover:opacity-90 cursor-pointer"
+      className="bg-card p-2 text-foreground transition hover:opacity-90 cursor-pointer bg-transparent"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (
