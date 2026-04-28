@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import ThemeToggle from "@/components/theme-toggle";
+import Link from "next/link";
 
-const navItems = ["Summary", "Logbook", "Tech Stack", "Benchmarks", "Contact"];
+const navItems = ["Summary", "Logbook", "Tech Stack", "Education", "Courses", "Contact"];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,16 +78,26 @@ export default function Navbar() {
         </h1>
 
         <ul className="hidden items-center gap-6 lg:flex">
-          {navItems.map((item) => (
-            <li key={item}>
-              <a
-                href="#"
-                className="text-sm font-medium text-muted transition hover:text-foreground"
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const href = item === "Summary" ? "#summary" 
+                       : item === "Logbook" ? "#logbook" 
+                       : item === "Tech Stack" ? "#tech-stack" 
+                       : item === "Education" ? "#education" 
+                       : item === "Courses" ? "#courses" 
+                       : item === "Benchmarks" ? "/status" 
+                       : item === "Contact" ? "#contact" 
+                       : "#";
+            return (
+              <li key={item}>
+                <Link
+                  href={href}
+                  className="text-sm font-medium text-muted transition hover:text-foreground"
+                >
+                  {item}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-3">
@@ -132,17 +143,27 @@ export default function Navbar() {
         }`}
       >
         <ul className="space-y-2">
-          {navItems.map((item) => (
-            <li key={`mobile-${item}`}>
-              <a
-                href="#"
-                className="block rounded-md px-2 py-2 text-sm font-medium text-muted transition hover:bg-surface hover:text-foreground"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const href = item === "Summary" ? "#summary" 
+                       : item === "Logbook" ? "#logbook" 
+                       : item === "Tech Stack" ? "#tech-stack" 
+                       : item === "Education" ? "#education" 
+                       : item === "Courses" ? "#courses" 
+                       : item === "Benchmarks" ? "/status" 
+                       : item === "Contact" ? "#contact" 
+                       : "#";
+            return (
+              <li key={`mobile-${item}`}>
+                <Link
+                  href={href}
+                  className="block rounded-md px-2 py-2 text-sm font-medium text-muted transition hover:bg-surface hover:text-foreground"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              </li>
+            );
+          })}
           <li>
             <div className="px-2 py-1">
               <ThemeToggle />

@@ -24,7 +24,7 @@ const stackCards = [
 
 export default function TechStackSection() {
   return (
-    <section className="w-full bg-background py-16">
+    <section id="tech-stack" className="w-full bg-background py-16">
       <div className="mx-auto w-[90%]">
         <p className="mb-2 text-xs font-bold tracking-[0.18em] text-muted">ENVIRONMENT</p>
         <h3 className="mb-8 text-4xl font-extrabold text-foreground">Tech Stack & Methodology</h3>

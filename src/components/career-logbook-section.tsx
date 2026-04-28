@@ -30,7 +30,7 @@ export default function CareerLogbookSection() {
   const rightColumnEntries = [careerEntries[1], careerEntries[3]];
 
   return (
-    <section className="w-full bg-background py-16">
+    <section id="logbook" className="w-full bg-background py-16">
       <div className="mx-auto w-[90%]">
         <h3 className="mb-8 text-4xl font-extrabold text-foreground">Career Logbook</h3>
 

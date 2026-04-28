@@ -50,7 +50,7 @@ export default function HeroSection() {
   }, [displayText, isDeleting, titleIndex]);
 
   return (
-    <section className="w-full bg-[radial-gradient(circle,rgba(100,116,139,0.18)_2px,transparent_2px)] bg-size-[34px_34px] dark:bg-[radial-gradient(circle,rgba(148,163,184,0.2)_2px,transparent_2px)]">
+    <section id="summary" className="w-full bg-[radial-gradient(circle,rgba(100,116,139,0.18)_2px,transparent_2px)] bg-size-[34px_34px] dark:bg-[radial-gradient(circle,rgba(148,163,184,0.2)_2px,transparent_2px)]">
       <div className="mx-auto grid w-[90%] gap-4 py-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-5">
         <div className="space-y-6">
           <span className="inline-flex items-center gap-2 rounded-full bg-emerald-600/15 px-4 py-1 text-xs font-semibold tracking-wide text-emerald-600 dark:text-emerald-400">
